@@ -3,6 +3,8 @@ package com.example.disen.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.disen.myapplication.backend.myApi.MyApi;
@@ -21,12 +23,20 @@ import java.io.IOException;
 public class JavaEndpointAsynctask extends AsyncTask<Context, Void, String> {
 private static MyApi myApiService = null;
 private Context context;
+    private ProgressBar mProgressbar;
 
-    public JavaEndpointAsynctask(Context context){
+    public JavaEndpointAsynctask(Context context,ProgressBar progressBar){
         this.context = context;
+        mProgressbar = progressBar;
     }
 
-@Override
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        mProgressbar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
 protected String doInBackground(Context... params) {
         if(myApiService == null) {  // Only do this once
         MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -51,7 +61,7 @@ public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientReques
         //String name = params[0];
 
         try {
-        return myApiService.getJoke().execute().getData();
+        return myApiService.getJoke().execute().getJoke();
         } catch (IOException e) {
         return e.getMessage();
         }
@@ -60,6 +70,7 @@ public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientReques
 @Override
 protected void onPostExecute(String result) {
     Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+    mProgressbar.setVisibility(View.GONE);
     Intent intent = new Intent(context, LibraryJokeActivity.class);
     intent.putExtra("joke",result);
     context.startActivity(intent);

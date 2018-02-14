@@ -6,8 +6,8 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name=".LibraryJokeActivity"
-            android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"></activity>
+        <activity android:name=".LibraryJokeActivity">
+            </activity>
     </application>
 
 </manifest>

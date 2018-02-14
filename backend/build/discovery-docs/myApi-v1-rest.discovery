@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"RnkXbyw9us4_w3H-FU6An0C4oYs/JCFw5ZoslugvvxNg2eZ5BgY_RqY\"",
+ "etag": "\"RnkXbyw9us4_w3H-FU6An0C4oYs/e-pC1s2j_3U70d-IsogoFOMYj7s\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -84,15 +84,24 @@
      "type": "string"
     }
    }
+  },
+  "MyJokes": {
+   "id": "MyJokes",
+   "type": "object",
+   "properties": {
+    "joke": {
+     "type": "string"
+    }
+   }
   }
  },
  "methods": {
   "getJoke": {
    "id": "myApi.getJoke",
-   "path": "mybean",
+   "path": "myjokes",
    "httpMethod": "GET",
    "response": {
-    "$ref": "MyBean"
+    "$ref": "MyJokes"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
